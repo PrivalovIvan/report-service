@@ -10,7 +10,6 @@ function App() {
   const [loadingFile, setLoadingFile] = useState(false);
   const [loadingZip, setLoadingZip] = useState(false);
 
-  // Базовый URL бэкенда (для разработки проксируется, для продакшена — полный)
   const API_BASE = '';
   // const API_BASE = process.env.NODE_ENV === 'development' ? '' : '/api';
 
@@ -25,12 +24,10 @@ function App() {
     try {
       // Отправляем GET-запрос, получаем blob (бинарные данные)
       const response = await axios.get(endpoint, {
-        // baseURL: 'localhost:8080/api/v1/report/download/file',
         baseURL: API_BASE,
-        responseType: 'blob', // важно для бинарных файлов
+        responseType: 'blob',
       });
 
-      // Создаём ссылку для скачивания
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement('a');
       link.href = url;
