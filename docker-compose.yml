@@ -1,0 +1,12 @@
+services:
+  report-service:
+    build: .
+    container_name: report-service
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./test-data.db3:/app/test-data.db3
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:sqlite:test-data.db3
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.sqlite.JDBC
+    restart: unless-stopped
